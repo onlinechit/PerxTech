@@ -1,0 +1,51 @@
+<div class="booksGrid">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="links">
+            <th mat-header-cell *matHeaderCellDef> Links </th>
+            <td mat-cell *matCellDef="let element"> {{element.links.self}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="attributes">
+            <th mat-header-cell *matHeaderCellDef> Attributes </th>
+            <td mat-cell *matCellDef="let element">
+                <b>URN: </b>{{element.attributes.urn}}<br/>
+                <b>Created At: </b>{{element.attributes.created_at}}<br/>
+                <b>Updated At: </b>{{element.attributes.updated_at}}<br/>
+                <b>Content: </b>{{element.attributes.content}}<br/>
+                <b>Properties: </b>{{element.attributes.properties}}<br/>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="relationships">
+            <th mat-header-cell *matHeaderCellDef> Relationships </th>
+            <td mat-cell *matCellDef="let element">
+                <b>Authors:</b><br/>
+                <b>Self:</b> {{element.relationships.authors.links.self}}<br/>
+                <b>Related:</b> {{element.relationships.authors.links.related}}
+                <br/>
+                <br/>
+                <b>Publishers:</b><br/>
+                <b>Self:</b> {{element.relationships.authors.links.self}}<br/>
+                <b>Related:</b> {{element.relationships.authors.links.related}}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
